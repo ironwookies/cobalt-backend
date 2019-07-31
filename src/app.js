@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const logger = require('../components/log/log.controller');
 const authRoute = require('./../routes/auth/auth');
+const userRoute = require('./../routes/users');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(logger);
 require('./../components/passport')(app);
 
 app.use('/', authRoute);
+app.use('/user', userRoute);
 
 app.use((req, res, next) => {
 	res.status(404).json({ error: 'Page not found' });
