@@ -16,7 +16,7 @@ const userSchema = new Schema(
 			unique: true,
 			match: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 		},
-		comtact: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+		contacts: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 		chat: [{ type: Schema.Types.ObjectId, ref: 'Chat' }],
 		files: [{ type: Schema.Types.ObjectId, ref: 'File' }],
 		verifiedEmail: { type: Boolean, default: false },
