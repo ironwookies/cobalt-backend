@@ -1,1 +1,1 @@
-const server = require('./src/server');
+const socketIO = require('./src/socketIO');
