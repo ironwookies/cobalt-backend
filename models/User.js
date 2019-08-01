@@ -7,7 +7,9 @@ const userSchema = new Schema(
 		firstName: { type: String, minlength: 3 },
 		familyName: { type: String, minlength: 2 },
 		// username: { type: String, unique: true, minlength: 4 },
-		password: { type: String, select: false },
+		password: { type: String,	
+			// select: false 
+		},
 		googleID: { type: String },
 		image: { type: String },
 		// chats: { type: Schema.Types.ObjectId, ref:  },
