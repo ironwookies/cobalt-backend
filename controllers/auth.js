@@ -47,8 +47,6 @@ exports.singup = async (req, res, next) => {
 						});
 					}
 				});
-
-				userCreated.password = null;
 				const token = jwt.sign(userCreated.toJSON(), process.env.SECRET);
 				res.status(201).json({
 					success: true,
@@ -71,18 +69,22 @@ exports.singup = async (req, res, next) => {
 };
 
 exports.login = async (req, res, next) => {
-	passport.authenticate('local', { session: false }, (err, user, info) => {
-		if (err || !user) {
-			return res.status(400).json({
-				message: 'Something is not right',
-			});
-		}
-		req.login(user, { session: false }, (err) => {
-			if (err) {
-				res.send(err);
+	return passport.authenticate(
+		'local',
+		{ session: false },
+		(err, user, info) => {
+			if (err || !user) {
+				return res.status(400).json({
+					message: 'Something is not right',
+				});
 			}
-			const token = jwt.sign(user.toJSON(), process.env.SECRET);
-			return res.json({ user, token });
-		});
-	})(req, res, next);
+			req.login(user, { session: false }, (err) => {
+				if (err) {
+					res.send(err);
+				}
+				const token = jwt.sign(user.toJSON(), process.env.SECRET);
+				return res.json({ user, token });
+			});
+		},
+	)(req, res, next);
 };

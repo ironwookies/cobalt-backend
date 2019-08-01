@@ -2,12 +2,19 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const logger = require('../components/log/log.controller');
 const authRoute = require('./../routes/auth/auth');
 const userRoute = require('./../routes/users');
 
 const app = express();
+app.use(
+	cors({
+		credentials: true,
+		origin: ['http://localhost:3001'],
+	}),
+);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
