@@ -9,6 +9,7 @@ passport.serializeUser((userFromDb, cb) => {
 
 passport.deserializeUser((idFromSession, cb) => {
 	User.findById(idFromSession)
+		.populate('contacts')
 		.then((user) => {
 			cb(null, user);
 		})

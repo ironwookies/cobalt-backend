@@ -26,7 +26,7 @@ router.get(
 	'/google/success',
 	passport.authenticate('google', {
 		failureRedirect: '/',
-		successRedirect: '/auth/private-page',
+		// successRedirect: '/auth/private-page',
 	}),
 );
 
