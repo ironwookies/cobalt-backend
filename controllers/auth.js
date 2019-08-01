@@ -38,6 +38,7 @@ exports.singup = async (req, res, next) => {
 					lastName: req.body.familyName,
 				});
 				userCreated.save((error) => {
+					console.log(error);
 					if (error) {
 						return res.status(422).json({
 							success: false,
@@ -47,8 +48,10 @@ exports.singup = async (req, res, next) => {
 						});
 					}
 				});
+
+				// userCreated.password = null;
 				const token = jwt.sign(userCreated.toJSON(), process.env.SECRET);
-				res.status(201).json({
+				return  res.status(201).json({
 					success: true,
 					message: 'Account created succesfully',
 					token,
@@ -63,7 +66,7 @@ exports.singup = async (req, res, next) => {
 			}
 		} catch (error) {
 			console.log(error);
-			res.status(200).json({ error });
+			return res.status(200).json({ error });
 		}
 	}
 };
