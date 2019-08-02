@@ -7,16 +7,13 @@ const usersController = require('./../controllers/users/');
 router.get(
 	'/',
 	passport.authenticate('jwt', { session: false }),
-	// usersController.getUsers,
-	(req, res, next)=>{
-
-	}
+	usersController.getUsers,
 );
 
 router.get(
 	'/email/:email',
 	passport.authenticate('jwt', { session: false }),
-	usersController.getUserByEmail
+	usersController.getUserByEmail,
 );
 
 router.get(
@@ -25,11 +22,10 @@ router.get(
 	usersController.getUser,
 );
 
-
 router.post(
 	'/:email',
 	passport.authenticate('jwt', { session: false }),
-	usersController.addContact
+	usersController.addContact,
 );
 
 module.exports = router;
