@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 module.exports.connect = () => {
-	mongoose.connect(process.env.MONGOURI, {
+	// mongoose.connect(process.env.MONGOURI, {
+	mongoose.connect('mongodb://localhost/cobalt', {
 		useCreateIndex: true,
 		useNewUrlParser: true,
 		useFindAndModify: false,

@@ -51,7 +51,7 @@ exports.singup = async (req, res, next) => {
 
 				// userCreated.password = null;
 				const token = jwt.sign(userCreated.toJSON(), process.env.SECRET);
-				return  res.status(201).json({
+				return res.status(201).json({
 					success: true,
 					message: 'Account created succesfully',
 					token,
