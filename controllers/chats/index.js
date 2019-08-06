@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+const User = require('./../../models/User');
 const Chat = require('./../../models/Chat');
 const Message = require('./../../models/Message');
 
@@ -20,14 +21,16 @@ exports.createChat = async (req, res, next) => {
 			});
 
 			let newChat = new Chat(req.body);
-
+			req.body.users.forEach(async (user) => {
+				await User.findByIdAndUpdate(user, { $push: { chat: newChat._id } });
+			});
 			newChat.save((error) => {
 				if (error) {
+					console.log(error);
 					return res.status(422).json({ message: 'Chat could not be created' });
 				}
+				return res.status(200).json({ message: 'Chat created', chat: newChat });
 			});
-
-			return res.status(200).json({ message: 'Chat created' });
 		} catch (error) {
 			next(error);
 		}

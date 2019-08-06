@@ -28,7 +28,7 @@ const connectEvents = (socket) => {
 	socket.on('chat message', function(msg) {
 		// console.log('message: ' + msg);
 		socket.broadcast.emit('received', { message: msg });
-		console.log(msg);
+		// console.log(msg);
 	});
 };
 

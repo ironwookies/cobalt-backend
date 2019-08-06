@@ -6,6 +6,7 @@ const messageSchema = new Schema(
 		content: { type: String, default: '' },
 		chat: { type: Schema.Types.ObjectId, ref: 'Chat' },
 		creator: { type: Schema.Types.ObjectId, ref: 'User' },
+		type: { type: String, enum: ['Text', 'Image'] },
 	},
 	{
 		timestamps: true,

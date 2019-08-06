@@ -41,17 +41,16 @@ exports.getUserByEmail = async (req, res, next) => {
 };
 
 exports.addContact = async (req, res, next) => {
-	try {
-		let contact = await User.findOne({ email: req.params.email });
-		if (contact) {
+	if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+		return res.status(404).json({ message: 'Could not find contact' });
+	} else {
+		try {
 			await User.findByIdAndUpdate(req.user._id, {
-				$addToSet: { contacts: contact._id },
+				$addToSet: { contacts: req.params.id },
 			});
-			res.status(200).json({ message: 'Contact added' });
-		} else {
-			res.status(404).json({ message: 'Could not find contact' });
+			res.status(201).json({ message: 'Contact Added' });
+		} catch (error) {
+			next(error);
 		}
-	} catch (error) {
-		next(error);
 	}
 };
