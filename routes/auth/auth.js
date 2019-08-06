@@ -4,7 +4,11 @@ const passport = require('passport');
 
 const authController = require('./../../controllers/auth');
 
-router.get('/profile', authController.profile);
+router.get(
+	'/profile',
+	passport.authenticate('jwt', { session: false }),
+	authController.profile,
+);
 
 router.put('/profile', authController.profileUpdate);
 
