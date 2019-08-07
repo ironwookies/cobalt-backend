@@ -26,11 +26,13 @@ app.use(logger);
 
 require('./../components/passport')(app);
 
-app.use(express.static('public'));
-
 app.use('/', authRoute);
 app.use('/user', userRoute);
 app.use('/chat', chatRoutes);
+
+app.use((req, res, next) => {
+	res.sendFile(__dirname + '/public/index.html');
+});
 
 app.use((req, res, next) => {
 	res.status(404).json({ error: 'Page not found' });
