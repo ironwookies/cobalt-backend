@@ -6,6 +6,7 @@ exports.profile = async (req, res, next) => {
 	const userInfo = await User.findById(req.user._id)
 		.populate('contacts')
 		.populate('chat');
+	console.log(userInfo);
 	res.status(200).json({
 		user: userInfo,
 	});
@@ -87,9 +88,10 @@ exports.login = async (req, res, next) => {
 				if (err) {
 					res.send(err);
 				}
-				const userInfo = await User.findById(user._id)
+				const userInfo = await User.findById(req.user._id)
 					.populate('contacts')
 					.populate('chat');
+				console.log(userInfo);
 				const token = jwt.sign(user.toJSON(), process.env.SECRET);
 				return res.json({ user: userInfo, token });
 			});

@@ -10,6 +10,7 @@ const userRoute = require('./../routes/users');
 const chatRoutes = require('./../routes/chats');
 
 const app = express();
+
 app.use(
 	cors({
 		credentials: true,
@@ -24,6 +25,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger);
 
 require('./../components/passport')(app);
+
+app.use(express.static('public'));
 
 app.use('/', authRoute);
 app.use('/user', userRoute);

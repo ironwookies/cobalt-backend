@@ -57,16 +57,15 @@ exports.getChatHistory = async (req, res, next) => {
 };
 
 exports.addMessage = async (req, res, next) => {
-	// console.log(req.body);
 	try {
 		if (!mongoose.Types.ObjectId.isValid(req.params.id) || !req.body.message) {
 			return res.status(404).json({ message: 'Chat not found' });
 		}
-
 		let message = new Message({
 			content: req.body.message,
 			creator: req.user._id,
 			chat: req.params.id,
+			type: req.body.type || 'Text',
 		});
 
 		message.save((error) => {
