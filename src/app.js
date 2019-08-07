@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const favicon = require('serve-favicon');
 
 const logger = require('../components/log/log.controller');
 const authRoute = require('./../routes/auth/auth');
@@ -20,6 +21,7 @@ app.use(
 	}),
 );
 
+app.use(favicon(path.join(__dirname, '/../public', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -30,9 +32,22 @@ require('./../components/passport')(app);
 app.use('/api/', authRoute);
 app.use('/api/user', userRoute);
 app.use('/api/chat', chatRoutes);
+const root = path.join(__dirname, '/../public/');
+app.use(express.static(root));
+// app.get('/', (req, res) => {
+// 	// res.sendFile(__dirname + '/../public/index.html');
+// 	res.sendFile(root);
+// });
 
-app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, '/../public/index.html'));
+app.use((req, res, next) => {
+	if (
+		req.method === 'GET' &&
+		req.accepts('html') &&
+		!req.is('json') &&
+		!req.path.includes('.')
+	) {
+		res.sendFile('index.html', { root });
+	} else next();
 });
 // app.use((req, res, next) => {
 // 	res.sendFile(path.join(__dirname, '/../public/index.html'));

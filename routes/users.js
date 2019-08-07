@@ -6,25 +6,25 @@ const usersController = require('./../controllers/users/');
 
 router.get(
 	'/',
-	passport.authenticate('jwt', { session: false }),
+	// passport.authenticate('jwt', { session: false }),
 	usersController.getUsers,
 );
 
 router.get(
 	'/email/:email',
-	passport.authenticate('jwt', { session: false }),
+	// passport.authenticate('jwt', { session: false }),
 	usersController.getUserByEmail,
 );
 
 router.get(
 	'/:id',
-	passport.authenticate('jwt', { session: false }),
+	// passport.authenticate('jwt', { session: false }),
 	usersController.getUser,
 );
 
 router.post(
 	'/:id',
-	passport.authenticate('jwt', { session: false }),
+	// passport.authenticate('jwt', { session: false }),
 	usersController.addContact,
 );
 
