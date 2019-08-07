@@ -34,10 +34,6 @@ app.use('/api/user', userRoute);
 app.use('/api/chat', chatRoutes);
 const root = path.join(__dirname, '/../public/');
 app.use(express.static(root));
-// app.get('/', (req, res) => {
-// 	// res.sendFile(__dirname + '/../public/index.html');
-// 	res.sendFile(root);
-// });
 
 app.use((req, res, next) => {
 	if (
