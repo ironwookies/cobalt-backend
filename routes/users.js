@@ -23,7 +23,7 @@ router.get(
 );
 
 router.post(
-	'/:email',
+	'/:id',
 	passport.authenticate('jwt', { session: false }),
 	usersController.addContact,
 );

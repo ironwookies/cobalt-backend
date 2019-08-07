@@ -2,10 +2,12 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const User = require('./../models/User');
 
-exports.profile = (req, res, next) => {
+exports.profile = async (req, res, next) => {
+	const userInfo = await User.findById(req.user._id)
+		.populate('contacts')
+		.populate('chat');
 	res.status(200).json({
-		status: 'success',
-		message: 'user is logged in',
+		user: userInfo,
 	});
 };
 
@@ -81,12 +83,15 @@ exports.login = async (req, res, next) => {
 					message: 'Something is not right',
 				});
 			}
-			req.login(user, { session: false }, (err) => {
+			req.login(user, { session: false }, async (err) => {
 				if (err) {
 					res.send(err);
 				}
+				const userInfo = await User.findById(user._id)
+					.populate('contacts')
+					.populate('chat');
 				const token = jwt.sign(user.toJSON(), process.env.SECRET);
-				return res.json({ user, token });
+				return res.json({ user: userInfo, token });
 			});
 		},
 	)(req, res, next);
