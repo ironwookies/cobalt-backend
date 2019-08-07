@@ -34,17 +34,17 @@ app.use((req, res, next) => {
 	res.sendFile(__dirname + '/public/index.html');
 });
 
-app.use((req, res, next) => {
-	res.status(404).json({ error: 'Page not found' });
-});
+// app.use((req, res, next) => {
+// 	res.status(404).json({ error: 'Page not found' });
+// });
 
-app.use((err, req, res, next) => {
-	console.error('ERROR', req.method, req.path, err);
+// app.use((err, req, res, next) => {
+// 	console.error('ERROR', req.method, req.path, err);
 
-	if (!res.headersSent) {
-		res.status(500);
-		res.json({ error: err });
-	}
-});
+// 	if (!res.headersSent) {
+// 		res.status(500);
+// 		res.json({ error: err });
+// 	}
+// });
 
 module.exports = app;
