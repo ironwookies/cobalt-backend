@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const logger = require('../components/log/log.controller');
 const authRoute = require('./../routes/auth/auth');
@@ -26,25 +27,25 @@ app.use(logger);
 
 require('./../components/passport')(app);
 
-app.use('/', authRoute);
-app.use('/user', userRoute);
-app.use('/chat', chatRoutes);
+app.use('/api/', authRoute);
+app.use('/api/user', userRoute);
+app.use('/api/chat', chatRoutes);
 
 app.use((req, res, next) => {
-	res.sendFile(__dirname + '/public/index.html');
+	res.sendFile(path.join(__dirname, '/../public/index.html'));
 });
 
-// app.use((req, res, next) => {
-// 	res.status(404).json({ error: 'Page not found' });
-// });
+app.use((req, res, next) => {
+	res.status(404).json({ error: 'Page not found' });
+});
 
-// app.use((err, req, res, next) => {
-// 	console.error('ERROR', req.method, req.path, err);
+app.use((err, req, res, next) => {
+	console.error('ERROR', req.method, req.path, err);
 
-// 	if (!res.headersSent) {
-// 		res.status(500);
-// 		res.json({ error: err });
-// 	}
-// });
+	if (!res.headersSent) {
+		res.status(500);
+		res.json({ error: err });
+	}
+});
 
 module.exports = app;
