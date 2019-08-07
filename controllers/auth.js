@@ -6,7 +6,6 @@ exports.profile = async (req, res, next) => {
 	const userInfo = await User.findById(req.user._id)
 		.populate('contacts')
 		.populate('chat');
-	console.log(userInfo);
 	res.status(200).json({
 		user: userInfo,
 	});
