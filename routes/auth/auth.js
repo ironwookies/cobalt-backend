@@ -4,6 +4,10 @@ const passport = require('passport');
 
 const authController = require('./../../controllers/auth');
 
+router.get('/', (req, res, next) => {
+	res.status(200).json({ test: 'test' });
+});
+
 router.get(
 	'/profile',
 	passport.authenticate('jwt', { session: false }),

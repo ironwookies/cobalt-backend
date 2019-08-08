@@ -87,7 +87,7 @@ exports.login = async (req, res, next) => {
 				if (err) {
 					res.send(err);
 				}
-				const userInfo = await User.findById(user._id)
+				const userInfo = await User.findById(req.user._id)
 					.populate('contacts')
 					.populate('chat');
 				const token = jwt.sign(user.toJSON(), process.env.SECRET);
