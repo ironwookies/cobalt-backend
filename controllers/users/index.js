@@ -4,7 +4,9 @@ const User = require('./../../models/User');
 
 exports.getUsers = async (req, res, next) => {
 	try {
-		const users = await User.find();
+		const users = await User.find({
+			_id: { $ne: mongoose.Types.ObjectId(req.user._id) },
+		});
 		res.status(200).json(users);
 	} catch (error) {
 		console.log(error);

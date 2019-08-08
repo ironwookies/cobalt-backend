@@ -20,7 +20,6 @@ app.use(
 	}),
 );
 
-// app.use(favicon(path.join(__dirname, '/../public', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -44,21 +43,5 @@ app.use((req, res, next) => {
 		res.sendFile('index.html', { root });
 	} else next();
 });
-// app.use((req, res, next) => {
-// 	res.sendFile(path.join(__dirname, '/../public/index.html'));
-// });
-
-// app.use((req, res, next) => {
-// 	res.status(404).json({ error: 'Page not found' });
-// });
-
-// app.use((err, req, res, next) => {
-// 	console.error('ERROR', req.method, req.path, err);
-
-// 	if (!res.headersSent) {
-// 		res.status(500);
-// 		res.json({ error: err });
-// 	}
-// });
 
 module.exports = app;
