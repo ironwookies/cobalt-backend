@@ -90,8 +90,8 @@ exports.login = async (req, res, next) => {
 				const userInfo = await User.findById(req.user._id)
 					.populate('contacts')
 					.populate('chat');
-				console.log(userInfo);
 				const token = jwt.sign(user.toJSON(), process.env.SECRET);
+				console.log(userInfo);
 				return res.json({ user: userInfo, token });
 			});
 		},

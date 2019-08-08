@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
 
 router.get(
 	'/profile',
-	// passport.authenticate('jwt', { session: false }),
+	passport.authenticate('jwt', { session: false }),
 	authController.profile,
 );
 
