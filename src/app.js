@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const favicon = require('serve-favicon');
+// const favicon = require('serve-favicon');
 
 const logger = require('../components/log/log.controller');
 const authRoute = require('./../routes/auth/auth');
@@ -20,7 +20,7 @@ app.use(
 	}),
 );
 
-app.use(favicon(path.join(__dirname, '/../public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, '/../public', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

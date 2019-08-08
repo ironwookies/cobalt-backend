@@ -91,7 +91,6 @@ exports.login = async (req, res, next) => {
 					.populate('contacts')
 					.populate('chat');
 				const token = jwt.sign(user.toJSON(), process.env.SECRET);
-				console.log(userInfo);
 				return res.json({ user: userInfo, token });
 			});
 		},
