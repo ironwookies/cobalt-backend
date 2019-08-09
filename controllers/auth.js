@@ -33,14 +33,12 @@ exports.singup = async (req, res, next) => {
 			let result = await User.find({ email: req.body.email });
 			if (result.length === 0) {
 				const userCreated = new User({
-					// username: req.body.username.toLowerCase(),
 					password: req.body.password,
 					email: req.body.email.toLowerCase(),
 					firstName: req.body.firstName,
-					lastName: req.body.familyName,
+					familyName: req.body.familyName,
 				});
 				userCreated.save((error) => {
-					console.log(error);
 					if (error) {
 						return res.status(422).json({
 							success: false,
@@ -80,7 +78,7 @@ exports.login = async (req, res, next) => {
 		(err, user, info) => {
 			if (err || !user) {
 				return res.status(400).json({
-					message: 'Something is not right',
+					message: 'Password or email incorrect',
 				});
 			}
 			req.login(user, { session: false }, async (err) => {
